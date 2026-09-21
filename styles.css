@@ -3,3 +3,5 @@
 .item{min-height:44px;padding:5px 10px;gap:9px}.check{width:22px;height:22px;padding:0}.item-name{font-size:15px;line-height:1.15}.qty{gap:5px}.qty button{width:25px;height:25px;font-size:16px;padding:0}.fab{right:max(14px,calc((100vw - 680px)/2 + 14px));bottom:calc(76px + env(safe-area-inset-bottom));height:36px;width:auto;padding:0 12px;border-radius:18px;font-size:12px;white-space:nowrap;box-shadow:0 3px 10px #0002}
 
 .category-label{margin-top:12px!important}.sheet select{display:block;width:100%;margin-top:6px;padding:13px;border:1px solid var(--line);border-radius:12px;font-size:16px;background:#fff;color:var(--ink)}.missing-item{display:block;margin:-6px auto 22px;border:0;background:none;color:var(--green);font-size:13px;font-weight:800;padding:10px 16px;text-decoration:underline}.fab.hidden{display:none!important}
+
+.delete-btn{width:100%;margin-top:10px;padding:12px;border:1px solid #d8b5b2;border-radius:14px;background:#fff;color:var(--danger);font-size:14px;font-weight:800}.pantry-add{flex:0 0 auto}.fab{display:block!important}
