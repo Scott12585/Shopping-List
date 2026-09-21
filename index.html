@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f7f8f5"><title>Shopping List</title><link rel="stylesheet" href="styles.css?v=35">
+<meta name="theme-color" content="#f7f8f5"><title>Shopping List</title><link rel="stylesheet" href="styles.css?v=36">
 </head>
 <body>
 <div class="app">
@@ -23,6 +23,11 @@
 </div></div></section>
 <section id="recipesView" class="hidden">
 <div class="recipe-tools"><div class="search"><span>⌕</span><input id="recipeSearch" placeholder="Search recipes…" autocomplete="off"></div><button class="recipe-top-add" id="addRecipeBtn">New Recipe</button></div>
+<div id="recipeCategoryTabs" class="recipe-category-tabs">
+<button type="button" class="active" data-recipe-category="Main Dishes">Main Dishes</button>
+<button type="button" data-recipe-category="Side Dishes">Side Dishes</button>
+<button type="button" data-recipe-category="Vegetables">Vegetables</button>
+</div>
 <div id="recipeList"></div>
 </section>
 </main><button class="fab" id="addBtn" aria-label="Add item">Add Item?</button>
@@ -174,6 +179,27 @@
   document.querySelectorAll('nav button[data-view]').forEach(b=>b.addEventListener('click',function(){
     planner.classList.add('hidden');
   }));
+})();
+</script>
+<script>
+(()=>{
+ const tabs=document.getElementById('recipeCategoryTabs'); if(!tabs)return;
+ let active='Main Dishes';
+ function applyRecipeCategory(){
+   document.querySelectorAll('#recipeList .recipe-card').forEach(card=>{
+     const cat=card.dataset.recipeCategory||'Main Dishes';
+     const wrap=card.closest('.recipe-swipe-row')||card;
+     wrap.style.display=cat===active?'':'none';
+   });
+ }
+ tabs.addEventListener('click',e=>{
+   const b=e.target.closest('[data-recipe-category]'); if(!b)return;
+   active=b.dataset.recipeCategory;
+   tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));
+   applyRecipeCategory();
+ });
+ new MutationObserver(applyRecipeCategory).observe(document.getElementById('recipeList'),{childList:true,subtree:true});
+ applyRecipeCategory();
 })();
 </script>
 </body></html>
