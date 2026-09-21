@@ -107,3 +107,9 @@ button.planner-day-static{border:0;width:100%;font-family:inherit;text-align:lef
 .planner-ing-row .planner-ing-toggle{border:1px solid #0c343d;background:#fff;color:#0c343d;border-radius:18px;padding:6px 10px;font-size:11px;font-weight:800;white-space:nowrap}
 .planner-ing-row .planner-ing-toggle.added{background:#e7eeee}
 .planner-ing-row .planner-ing-toggle:disabled{opacity:.55}
+
+/* Recipe category tabs - v36 */
+.recipe-category-tabs{display:flex;gap:6px;overflow-x:auto;padding:0 0 10px;scrollbar-width:none}
+.recipe-category-tabs::-webkit-scrollbar{display:none}
+.recipe-category-tabs button{flex:0 0 auto;border:1px solid #d9e0dd;background:#fff;color:#52605d;border-radius:18px;padding:7px 11px;font-size:11px;font-weight:800}
+.recipe-category-tabs button.active{background:#0c343d;border-color:#0c343d;color:#fff}
