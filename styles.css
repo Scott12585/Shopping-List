@@ -5,3 +5,6 @@
 .category-label{margin-top:12px!important}.sheet select{display:block;width:100%;margin-top:6px;padding:13px;border:1px solid var(--line);border-radius:12px;font-size:16px;background:#fff;color:var(--ink)}.missing-item{display:block;margin:-6px auto 22px;border:0;background:none;color:var(--green);font-size:13px;font-weight:800;padding:10px 16px;text-decoration:underline}.fab.hidden{display:none!important}
 
 .delete-btn{width:100%;margin-top:10px;padding:12px;border:1px solid #d8b5b2;border-radius:14px;background:#fff;color:var(--danger);font-size:14px;font-weight:800}.pantry-add{flex:0 0 auto}.fab{display:block!important}
+
+/* Pantry swipe-to-delete */
+.swipe-row{position:relative;overflow:hidden;background:#c62828;border-bottom:1px solid var(--line)}.swipe-row:last-child{border-bottom:0}.swipe-item{position:relative;z-index:2;background:var(--card);border-bottom:0;transition:transform .18s ease;will-change:transform}.swipe-delete{position:absolute;right:0;top:0;bottom:0;width:78px;border:0;background:#c62828;color:#fff;font-size:13px;font-weight:800;z-index:1}.card>.swipe-row:first-child,.card>.swipe-row:first-child .swipe-item{border-radius:15px 15px 0 0}.card>.swipe-row:last-child,.card>.swipe-row:last-child .swipe-item{border-radius:0 0 15px 15px}.card>.swipe-row:only-child,.card>.swipe-row:only-child .swipe-item{border-radius:15px}
