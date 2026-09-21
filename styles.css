@@ -165,3 +165,7 @@ nav .nav-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-wi
 /* Planner meal emphasis - v50 */
 .planner-day-static>span{font-size:15px;font-weight:800;color:#263f42;line-height:1.25}
 .planner-meal-extras{margin-top:4px;color:#566768;font-size:11px;font-weight:650;line-height:1.3}
+
+/* Match Recipes side margins to Shopping/Pantry - v52 */
+#recipesView{padding-left:16px;padding-right:16px}
+#recipesView .recipe-tools,#recipesView .recipe-category-tabs,#recipesView #recipeList{width:100%}
