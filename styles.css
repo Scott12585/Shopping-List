@@ -120,3 +120,10 @@ button.planner-day-static{border:0;width:100%;font-family:inherit;text-align:lef
 
 /* Toast visibility v40 */
 #toast,.toast{position:fixed!important;left:50%!important;bottom:90px!important;transform:translateX(-50%)!important;z-index:99999!important;max-width:calc(100vw - 32px);width:max-content;pointer-events:none}
+
+/* Planner meal components - v41 */
+.planner-pair{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:8px}
+.planner-pair label{min-width:0}
+.planner-pair label small{font-size:9px;font-weight:500;color:#8a9292}
+.planner-pair select{width:100%;min-width:0}
+@media(max-width:390px){.planner-pair{grid-template-columns:1fr}}
