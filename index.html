@@ -142,6 +142,9 @@
     plannerSelectedDay=i;
     const row=plannerCurrentRows.find(x=>x.day_index===i);
     dinnerCustom.value=row?.custom_meal||'';
+    const recipeNameById=id=>{if(!id)return '';const card=[...document.querySelectorAll('.recipe-card')].find(x=>x.querySelector('.swipe-edit')?.getAttribute('onclick')?.includes('('+id+')'));return card?.querySelector('.recipe-head > span:first-child')?.textContent.trim()||''};
+    dinnerVegetable.value=recipeNameById(row?.vegetable_recipe_id);
+    dinnerSide.value=recipeNameById(row?.side_recipe_id);
     if(row?.recipe_id){
       const card=[...document.querySelectorAll('.recipe-card')].find(x=>x.querySelector('.swipe-edit')?.getAttribute('onclick')?.includes('('+row.recipe_id+')'));
       dinnerRecipe.value=card?.querySelector('.recipe-head > span:first-child')?.textContent.trim()||'';
@@ -153,7 +156,7 @@
     const recipeName=dinnerRecipe.value, custom=dinnerCustom.value.trim();
     if(!recipeName&&!custom)return;
     const day=document.querySelectorAll('.planner-day-static')[plannerSelectedDay];
-    const body={week_start:plannerWeekKey(),day_index:plannerSelectedDay,recipe_id:recipeName?plannerRecipeId(recipeName):null,custom_meal:custom||null,updated_at:new Date().toISOString()};
+    const body={week_start:plannerWeekKey(),day_index:plannerSelectedDay,recipe_id:recipeName?plannerRecipeId(recipeName):null,vegetable_recipe_id:dinnerVegetable.value?plannerRecipeId(dinnerVegetable.value):null,side_recipe_id:dinnerSide.value?plannerRecipeId(dinnerSide.value):null,custom_meal:custom||null,updated_at:new Date().toISOString()};
     try{
       if(day.dataset.planId)await plannerApi('shop_meal_plan?id=eq.'+day.dataset.planId,{method:'PATCH',body:JSON.stringify(body)});
       else await plannerApi('shop_meal_plan',{method:'POST',body:JSON.stringify(body)});
