@@ -8,3 +8,5 @@
 
 /* Pantry swipe-to-delete */
 .swipe-row{position:relative;overflow:hidden;background:#c62828;border-bottom:1px solid var(--line)}.swipe-row:last-child{border-bottom:0}.swipe-item{position:relative;z-index:2;background:var(--card);border-bottom:0;transition:transform .18s ease;will-change:transform}.swipe-delete{position:absolute;right:0;top:0;bottom:0;width:78px;border:0;background:#c62828;color:#fff;font-size:13px;font-weight:800;z-index:1}.card>.swipe-row:first-child,.card>.swipe-row:first-child .swipe-item{border-radius:15px 15px 0 0}.card>.swipe-row:last-child,.card>.swipe-row:last-child .swipe-item{border-radius:0 0 15px 15px}.card>.swipe-row:only-child,.card>.swipe-row:only-child .swipe-item{border-radius:15px}
+
+.swipe-item{touch-action:pan-y;-webkit-user-select:none;user-select:none}.swipe-delete{width:82px}
