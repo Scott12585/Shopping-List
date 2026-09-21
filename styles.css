@@ -117,3 +117,6 @@ button.planner-day-static{border:0;width:100%;font-family:inherit;text-align:lef
 /* Recipe editor category - v37 */
 #recipeEditCategory{width:100%;margin:4px 0 10px}
 #recipeEditModal .field-label{display:block;margin-top:6px;color:#52605d;font-size:11px;font-weight:800}
+
+/* Toast visibility v40 */
+#toast,.toast{position:fixed!important;left:50%!important;bottom:90px!important;transform:translateX(-50%)!important;z-index:99999!important;max-width:calc(100vw - 32px);width:max-content;pointer-events:none}
