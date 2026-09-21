@@ -76,3 +76,9 @@ nav button{min-width:0}
 .planner-week-nav{display:grid;grid-template-columns:38px 1fr 38px;align-items:center}
 .planner-week-nav button{width:34px;height:34px;border:0;border-radius:18px;background:#e7eeee;color:#0c343d;font-size:24px;line-height:1}
 .planner-week-nav div{text-align:center}
+
+/* Planner dinner modal preview - v29 */
+button.planner-day-static{border:0;width:100%;font-family:inherit;text-align:left}
+.or-line{display:flex;align-items:center;gap:8px;color:#909999;font-size:11px;margin:8px 0}
+.or-line:before,.or-line:after{content:"";height:1px;background:#e1e5e5;flex:1}
+.planner-preview-note{text-align:center;color:#8a9292;font-size:11px;margin:10px 0 0}
