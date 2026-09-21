@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f7f8f5"><title>Shopping List</title><link rel="stylesheet" href="styles.css?v=32">
+<meta name="theme-color" content="#f7f8f5"><title>Shopping List</title><link rel="stylesheet" href="styles.css?v=33">
 </head>
 <body>
 <div class="app">
@@ -29,7 +29,7 @@
 <nav><button data-view="shopping" class="active"><span>✓</span>Shopping</button><button data-view="pantry"><span>▦</span>Pantry</button><button data-view="recipes"><span>☷</span>Recipes</button><button id="plannerPreviewBtn" type="button"><span>▦</span>Planner</button></nav>
 </div>
 <div class="modal hidden" id="modal"><div class="sheet"><div class="grab"></div><div class="sheet-head"><h2>Add item</h2><button id="closeModal">×</button></div><label>Item name<input id="customName" placeholder="What do you need?"></label><label class="category-label">Category<select id="customCategory"></select></label><div class="row"><label>Quantity<input id="customQty" type="number" min="1" value="1"></label><label>Price<input id="customPrice" type="number" min="0" step=".01" placeholder="0.00"></label></div><label class="note-label">Note (optional)<input id="customNote" placeholder="Add a note…"></label><button id="saveCustom" class="primary">Add to list</button></div></div>
-<div class="modal hidden" id="pantryEditModal"><div class="sheet"><div class="grab"></div><div class="sheet-head"><h2>Edit pantry item</h2><button id="closePantryEdit">×</button></div><label>Item name<input id="pantryEditName"></label><label class="category-label">Category<select id="pantryEditCategory"></select></label><div class="row"><label>Price<input id="pantryEditPrice" type="number" min="0" step=".01" placeholder="0.00"></label><label>Unit<input id="pantryEditUnit" placeholder="Per, Lbs, Bag…"></label></div><label class="note-label">Note (optional)<input id="pantryEditNote" placeholder="Add a note…"></label><button id="savePantryEdit" class="primary">Save changes</button><button id="deletePantryItem" class="delete-btn">Delete item</button></div></div><div class="modal hidden" id="editModal"><div class="sheet"><div class="grab"></div><div class="sheet-head"><h2>Edit item</h2><button id="closeEdit">×</button></div><div class="edit-item-name" id="editItemName"></div><label>Price<input id="editPrice" type="number" min="0" step=".01" placeholder="0.00"></label><label class="note-label">Note (optional)<input id="editNote" placeholder="Add a note…"></label><button id="saveEdit" class="primary">Save</button></div></div><div class="modal hidden" id="recipeEditModal"><div class="sheet"><div class="grab"></div><div class="sheet-head"><h2 id="recipeEditTitle">Add recipe</h2><button id="closeRecipeEdit">×</button></div><label>Recipe name<input id="recipeEditName" placeholder="Recipe name"></label><div class="recipe-editor-head"><strong>Ingredients</strong><button id="addIngredientRow" class="small-outline">+ Ingredient</button></div><div id="recipeIngredientEditor"></div><button id="saveRecipe" class="primary">Save recipe</button><button id="deleteRecipe" class="delete-btn hidden">Delete recipe</button></div></div><div class="modal hidden" id="plannerDinnerModal"><div class="sheet"><div class="grab"></div><div class="sheet-head"><h2 id="plannerDinnerTitle">Add Dinner</h2><button id="plannerDinnerClose">×</button></div><label>Recipe<select id="plannerDinnerRecipe"><option value="">Select a recipe…</option></select></label><div class="or-line"><span>or</span></div><label>Custom dinner<input id="plannerDinnerCustom" placeholder="Pizza, Leftovers, Eat out…"></label><button id="plannerDinnerPreviewSave" class="primary">Save dinner</button><button id="plannerDinnerClear" class="delete-btn hidden">Clear this day</button><p class="planner-preview-note">Dinner will be saved to this week.</p></div></div><div class="toast hidden" id="toast"></div><script src="app.js?v=25"></script>
+<div class="modal hidden" id="pantryEditModal"><div class="sheet"><div class="grab"></div><div class="sheet-head"><h2>Edit pantry item</h2><button id="closePantryEdit">×</button></div><label>Item name<input id="pantryEditName"></label><label class="category-label">Category<select id="pantryEditCategory"></select></label><div class="row"><label>Price<input id="pantryEditPrice" type="number" min="0" step=".01" placeholder="0.00"></label><label>Unit<input id="pantryEditUnit" placeholder="Per, Lbs, Bag…"></label></div><label class="note-label">Note (optional)<input id="pantryEditNote" placeholder="Add a note…"></label><button id="savePantryEdit" class="primary">Save changes</button><button id="deletePantryItem" class="delete-btn">Delete item</button></div></div><div class="modal hidden" id="editModal"><div class="sheet"><div class="grab"></div><div class="sheet-head"><h2>Edit item</h2><button id="closeEdit">×</button></div><div class="edit-item-name" id="editItemName"></div><label>Price<input id="editPrice" type="number" min="0" step=".01" placeholder="0.00"></label><label class="note-label">Note (optional)<input id="editNote" placeholder="Add a note…"></label><button id="saveEdit" class="primary">Save</button></div></div><div class="modal hidden" id="recipeEditModal"><div class="sheet"><div class="grab"></div><div class="sheet-head"><h2 id="recipeEditTitle">Add recipe</h2><button id="closeRecipeEdit">×</button></div><label>Recipe name<input id="recipeEditName" placeholder="Recipe name"></label><div class="recipe-editor-head"><strong>Ingredients</strong><button id="addIngredientRow" class="small-outline">+ Ingredient</button></div><div id="recipeIngredientEditor"></div><button id="saveRecipe" class="primary">Save recipe</button><button id="deleteRecipe" class="delete-btn hidden">Delete recipe</button></div></div><div class="modal hidden" id="plannerDinnerModal"><div class="sheet"><div class="grab"></div><div class="sheet-head"><h2 id="plannerDinnerTitle">Add Dinner</h2><button id="plannerDinnerClose">×</button></div><label>Recipe<select id="plannerDinnerRecipe"><option value="">Select a recipe…</option></select></label><div class="or-line"><span>or</span></div><label>Custom dinner<input id="plannerDinnerCustom" placeholder="Pizza, Leftovers, Eat out…"></label><div id="plannerDinnerIngredients" class="planner-dinner-ingredients hidden"></div><button id="plannerDinnerPreviewSave" class="primary">Save dinner</button><button id="plannerDinnerClear" class="delete-btn hidden">Clear this day</button><p class="planner-preview-note">Dinner will be saved to this week.</p></div></div><div class="toast hidden" id="toast"></div><script src="app.js?v=25"></script>
 <script>
 (function(){
   const btn=document.getElementById('plannerPreviewBtn');
@@ -59,19 +59,33 @@
   const dinnerClose=document.getElementById('plannerDinnerClose');
   const dinnerRecipe=document.getElementById('plannerDinnerRecipe');
   const dinnerCustom=document.getElementById('plannerDinnerCustom');
+  const dinnerIngredients=document.getElementById('plannerDinnerIngredients');
+  function showPlannerIngredients(){
+    const name=dinnerRecipe?.value||'';
+    if(!name){dinnerIngredients.innerHTML='';dinnerIngredients.classList.add('hidden');return}
+    const card=[...document.querySelectorAll('.recipe-card')].find(x=>x.querySelector('.recipe-head > span:first-child')?.textContent.trim()===name);
+    const rows=card?[...card.querySelectorAll('.recipe-ing')]:[];
+    if(!rows.length){dinnerIngredients.innerHTML='';dinnerIngredients.classList.add('hidden');return}
+    dinnerIngredients.innerHTML='<div class="planner-ing-title">Ingredients</div>'+rows.map(r=>{
+      const label=r.querySelector('span')?.textContent.trim()||'';
+      const added=r.querySelector('.recipe-add')?.classList.contains('added');
+      return '<div class="planner-ing-row"><span>'+label.replaceAll('&','&amp;').replaceAll('<','&lt;')+'</span><small class="'+(added?'on':'')+'">'+(added?'Added':'Not added')+'</small></div>';
+    }).join('');
+    dinnerIngredients.classList.remove('hidden');
+  }
   document.querySelectorAll('.planner-day-static').forEach(day=>{
     day.addEventListener('click',()=>{
       const dayName=day.querySelector('strong')?.textContent||'Dinner';
       dinnerTitle.textContent=dayName+' Dinner';
       const names=[...document.querySelectorAll('.recipe-head > span:first-child')].map(x=>x.textContent.trim()).filter(Boolean);
       dinnerRecipe.innerHTML='<option value="">Select a recipe…</option>'+names.map(n=>'<option>'+n.replaceAll('&','&amp;').replaceAll('<','&lt;')+'</option>').join('');
-      dinnerRecipe.value=''; dinnerCustom.value='';
+      dinnerRecipe.value=''; dinnerCustom.value=''; showPlannerIngredients();
       dinnerModal.classList.remove('hidden');
     });
   });
   if(dinnerClose)dinnerClose.addEventListener('click',()=>dinnerModal.classList.add('hidden'));
   if(dinnerModal)dinnerModal.addEventListener('click',e=>{if(e.target===dinnerModal)dinnerModal.classList.add('hidden')});
-  if(dinnerRecipe)dinnerRecipe.addEventListener('change',()=>{if(dinnerRecipe.value)dinnerCustom.value=''});
+  if(dinnerRecipe)dinnerRecipe.addEventListener('change',()=>{if(dinnerRecipe.value)dinnerCustom.value='';showPlannerIngredients()});
   if(dinnerCustom)dinnerCustom.addEventListener('input',()=>{if(dinnerCustom.value.trim())dinnerRecipe.value=''});
   const previewSave=document.getElementById('plannerDinnerPreviewSave');
   let plannerSelectedDay=null;
@@ -114,7 +128,7 @@
       const card=[...document.querySelectorAll('.recipe-card')].find(x=>x.querySelector('.swipe-edit')?.getAttribute('onclick')?.includes('('+row.recipe_id+')'));
       dinnerRecipe.value=card?.querySelector('.recipe-head > span:first-child')?.textContent.trim()||'';
     }else dinnerRecipe.value='';
-    plannerClear.classList.toggle('hidden',!row);
+    showPlannerIngredients(); plannerClear.classList.toggle('hidden',!row);
   }));
   if(previewSave)previewSave.addEventListener('click',async()=>{
     if(plannerSelectedDay===null)return;
