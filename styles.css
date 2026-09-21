@@ -169,3 +169,6 @@ nav .nav-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-wi
 /* Match Recipes side margins to Shopping/Pantry - v52 */
 #recipesView{padding-left:16px;padding-right:16px}
 #recipesView .recipe-tools,#recipesView .recipe-category-tabs,#recipesView #recipeList{width:100%}
+
+/* Keep floating Add Item button clear of final Shopping/Pantry rows - v54 */
+#shoppingView,#pantryView{padding-bottom:72px}
