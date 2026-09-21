@@ -93,3 +93,10 @@ button.planner-day-static{border:0;width:100%;font-family:inherit;text-align:lef
 .planner-ing-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 11px;border-top:1px solid #eef0ed;font-size:13px}
 .planner-ing-row small{white-space:nowrap;color:#8a9292;font-size:10px;font-weight:700}
 .planner-ing-row small.on{color:#0c343d}
+
+/* Planner modal scrolling fix - v34 */
+#plannerDinnerModal{align-items:flex-end;overflow:hidden}
+#plannerDinnerModal .sheet{max-height:calc(100dvh - env(safe-area-inset-top) - 18px);overflow-y:auto;overscroll-behavior:contain;padding-bottom:calc(18px + env(safe-area-inset-bottom));scrollbar-width:none}
+#plannerDinnerModal .sheet::-webkit-scrollbar{display:none}
+#plannerDinnerModal .sheet-head{position:sticky;top:0;z-index:3;background:#fff;padding-top:4px}
+#plannerDinnerModal .grab{position:sticky;top:0;z-index:4;background:#cbd1ce}
