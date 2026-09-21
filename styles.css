@@ -55,3 +55,9 @@
 
 /* Swipe Edit + Delete v20 */
 .swipe-actions{position:absolute;top:4px;right:4px;bottom:4px;width:146px;display:flex;gap:5px;z-index:0}.swipe-actions button{position:static;flex:1;width:auto;height:100%;border:0;color:#fff;font-size:12px;font-weight:800}.swipe-actions .swipe-edit{background:#0c343d;border-radius:12px 5px 5px 12px}.swipe-actions .swipe-delete{background:#c62828;border-radius:5px 12px 12px 5px}.recipe-swipe-row{position:relative;overflow:hidden;border-radius:14px;margin-bottom:10px;background:transparent}.recipe-swipe-item{position:relative;z-index:1;background:#fff;border-radius:14px;overflow:hidden}.recipe-card.recipe-swipe-row{padding:0}.recipe-swipe-row .recipe-head{padding:13px 14px;min-height:48px}.recipe-edit-mini{display:none}
+
+/* Planner shell only - v26 */
+.planner-placeholder{margin:8px 16px;background:#fff;border-radius:14px;padding:22px 18px;text-align:center;box-shadow:0 1px 4px #0000000c}
+.planner-placeholder strong{display:block;color:#0c343d;font-size:18px;margin-bottom:6px}
+.planner-placeholder span{display:block;color:#747c72;font-size:13px;line-height:1.4}
+nav button{min-width:0}
