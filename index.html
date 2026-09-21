@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f7f8f5"><title>Shopping List</title><link rel="stylesheet" href="styles.css?v=27">
+<meta name="theme-color" content="#f7f8f5"><title>Shopping List</title><link rel="stylesheet" href="styles.css?v=28">
 </head>
 <body>
 <div class="app">
@@ -17,7 +17,7 @@
 <div class="search"><span>⌕</span><input id="search" placeholder="Search pantry…" autocomplete="off"></div>
 <div class="chips" id="chips"></div><div id="pantryList"></div><button class="missing-item hidden" id="missingItem">Item missing? Click here to add it</button>
 </section>
-<section id="plannerView" class="hidden"><div class="planner-week-static"><div class="planner-week-title"><strong>This Week</strong><span>Dinner Plan</span></div>
+<section id="plannerView" class="hidden"><div class="planner-week-static"><div class="planner-week-title planner-week-nav"><button id="plannerPrevWeek" aria-label="Previous week">‹</button><div><strong id="plannerWeekLabel">This Week</strong><span>Dinner Plan</span></div><button id="plannerNextWeek" aria-label="Next week">›</button></div>
 <div class="planner-days-static">
 <div class="planner-day-static"><strong>Monday</strong><span>+ Add dinner</span><b>›</b></div><div class="planner-day-static"><strong>Tuesday</strong><span>+ Add dinner</span><b>›</b></div><div class="planner-day-static"><strong>Wednesday</strong><span>+ Add dinner</span><b>›</b></div><div class="planner-day-static"><strong>Thursday</strong><span>+ Add dinner</span><b>›</b></div><div class="planner-day-static"><strong>Friday</strong><span>+ Add dinner</span><b>›</b></div><div class="planner-day-static"><strong>Saturday</strong><span>+ Add dinner</span><b>›</b></div><div class="planner-day-static"><strong>Sunday</strong><span>+ Add dinner</span><b>›</b></div>
 </div></div></section>
@@ -33,6 +33,21 @@
 <script>
 (function(){
   const btn=document.getElementById('plannerPreviewBtn');
+  let plannerWeekOffset=0;
+  const weekLabel=document.getElementById('plannerWeekLabel');
+  const prevWeek=document.getElementById('plannerPrevWeek');
+  const nextWeek=document.getElementById('plannerNextWeek');
+  function updatePlannerWeek(){
+    const d=new Date(); d.setHours(12,0,0,0);
+    const mondayOffset=(d.getDay()+6)%7;
+    d.setDate(d.getDate()-mondayOffset+(plannerWeekOffset*7));
+    const end=new Date(d); end.setDate(end.getDate()+6);
+    const fmt=x=>x.toLocaleDateString(undefined,{month:'short',day:'numeric'});
+    if(weekLabel) weekLabel.textContent=plannerWeekOffset===0?'This Week · '+fmt(d)+' – '+fmt(end):fmt(d)+' – '+fmt(end);
+  }
+  if(prevWeek) prevWeek.addEventListener('click',()=>{plannerWeekOffset--;updatePlannerWeek()});
+  if(nextWeek) nextWeek.addEventListener('click',()=>{plannerWeekOffset++;updatePlannerWeek()});
+  updatePlannerWeek();
   const planner=document.getElementById('plannerView');
   if(!btn||!planner)return;
   btn.addEventListener('click',function(){
