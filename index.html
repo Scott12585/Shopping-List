@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f7f8f5"><title>Shopping List</title><link rel="stylesheet" href="styles.css?v=41">
+<meta name="theme-color" content="#f7f8f5"><title>Shopping List</title><link rel="stylesheet" href="styles.css?v=43">
 </head>
 <body>
 <div class="app">
@@ -68,23 +68,32 @@
   const dinnerSide=document.getElementById('plannerDinnerSide');
   const dinnerIngredients=document.getElementById('plannerDinnerIngredients');
   function showPlannerIngredients(){
-    const name=dinnerRecipe?.value||'';
-    if(!name){dinnerIngredients.innerHTML='';dinnerIngredients.classList.add('hidden');return}
-    const card=[...document.querySelectorAll('.recipe-card')].find(x=>x.querySelector('.recipe-head > span:first-child')?.textContent.trim()===name);
-    const rows=card?[...card.querySelectorAll('.recipe-ing')]:[];
-    if(!rows.length){dinnerIngredients.innerHTML='';dinnerIngredients.classList.add('hidden');return}
-    dinnerIngredients.innerHTML='<div class="planner-ing-title">Ingredients</div>'+rows.map(r=>{
-      const label=r.querySelector('span')?.textContent.trim()||'';
-      const added=r.querySelector('.recipe-add')?.classList.contains('added');
-      const addBtn=r.querySelector('.recipe-add'); const m=addBtn?.getAttribute('onclick')?.match(/\((\d+)\)/); const ingredientId=m?Number(m[1]):null;
-      return '<div class="planner-ing-row"><span>'+label.replaceAll('&','&amp;').replaceAll('<','&lt;')+'</span><button class="planner-ing-toggle '+(added?'added':'')+'" data-ingredient-id="'+(ingredientId||'')+'">'+(added?'✓ Added':'+ Add')+'</button></div>';
-    }).join('');
+    const selections=[
+      ['Main Dish',dinnerRecipe?.value||''],
+      ['Vegetable',dinnerVegetable?.value||''],
+      ['Side Dish',dinnerSide?.value||'']
+    ].filter(x=>x[1]);
+    if(!selections.length){dinnerIngredients.innerHTML='';dinnerIngredients.classList.add('hidden');return}
+    const cards=[...document.querySelectorAll('.recipe-card')];
+    let groups='';
+    selections.forEach(([kind,name])=>{
+      const card=cards.find(x=>x.querySelector('.recipe-head > span:first-child')?.textContent.trim()===name);
+      const rows=card?[...card.querySelectorAll('.recipe-ing')]:[];
+      if(!rows.length)return;
+      groups+='<div class="planner-ing-group"><div class="planner-ing-title">'+kind+' · '+name.replaceAll('&','&amp;').replaceAll('<','&lt;')+'</div>'+rows.map(r=>{
+        const label=r.querySelector('span')?.textContent.trim()||'';
+        const added=r.querySelector('.recipe-add')?.classList.contains('added');
+        const addBtn=r.querySelector('.recipe-add'); const m=addBtn?.getAttribute('onclick')?.match(/\((\d+)\)/); const ingredientId=m?Number(m[1]):null;
+        return '<div class="planner-ing-row"><span>'+label.replaceAll('&','&amp;').replaceAll('<','&lt;')+'</span><button class="planner-ing-toggle '+(added?'added':'')+'" data-ingredient-id="'+(ingredientId||'')+'">'+(added?'✓ Added':'+ Add')+'</button></div>';
+      }).join('')+'</div>';
+    });
+    if(!groups){dinnerIngredients.innerHTML='';dinnerIngredients.classList.add('hidden');return}
+    dinnerIngredients.innerHTML=groups;
     dinnerIngredients.classList.remove('hidden');
     dinnerIngredients.querySelectorAll('.planner-ing-toggle').forEach(b=>b.addEventListener('click',async e=>{
-      e.preventDefault(); e.stopPropagation();
-      const id=Number(b.dataset.ingredientId); if(!id||typeof addRecipeIngredient!=='function')return;
-      b.disabled=true;
-      try{await addRecipeIngredient(id);showPlannerIngredients()}finally{b.disabled=false}
+      e.preventDefault();e.stopPropagation();
+      const id=Number(b.dataset.ingredientId);if(!id||typeof addRecipeIngredient!=='function')return;
+      b.disabled=true;try{await addRecipeIngredient(id);showPlannerIngredients()}finally{b.disabled=false}
     }));
   }
   document.querySelectorAll('.planner-day-static').forEach(day=>{
@@ -104,6 +113,8 @@
   if(dinnerClose)dinnerClose.addEventListener('click',()=>dinnerModal.classList.add('hidden'));
   if(dinnerModal)dinnerModal.addEventListener('click',e=>{if(e.target===dinnerModal)dinnerModal.classList.add('hidden')});
   if(dinnerRecipe)dinnerRecipe.addEventListener('change',()=>{if(dinnerRecipe.value)dinnerCustom.value='';showPlannerIngredients()});
+  if(dinnerVegetable)dinnerVegetable.addEventListener('change',showPlannerIngredients);
+  if(dinnerSide)dinnerSide.addEventListener('change',showPlannerIngredients);
   if(dinnerCustom)dinnerCustom.addEventListener('input',()=>{if(dinnerCustom.value.trim())dinnerRecipe.value=''});
   const previewSave=document.getElementById('plannerDinnerPreviewSave');
   let plannerSelectedDay=null;
@@ -133,7 +144,13 @@
             const card=[...document.querySelectorAll('.recipe-card')].find(x=>x.querySelector('.swipe-edit')?.getAttribute('onclick')?.includes('('+row.recipe_id+')'));
             label=card?.querySelector('.recipe-head > span:first-child')?.textContent.trim()||label;
           }
-          target.textContent=label; day.classList.add('planned'); day.dataset.planId=row.id;
+          target.innerHTML='<span class="planner-main-label">'+label.replaceAll('&','&amp;').replaceAll('<','&lt;')+'</span>';
+          const extras=[];
+          const recipeNameById=id=>{if(!id)return '';const card=[...document.querySelectorAll('.recipe-card')].find(x=>x.querySelector('.swipe-edit')?.getAttribute('onclick')?.includes('('+id+')'));return card?.querySelector('.recipe-head > span:first-child')?.textContent.trim()||''};
+          const veg=recipeNameById(row.vegetable_recipe_id), side=recipeNameById(row.side_recipe_id);
+          if(veg)extras.push(veg); if(side)extras.push(side);
+          if(extras.length)target.insertAdjacentHTML('beforeend','<small class="planner-meal-extras">'+extras.map(x=>x.replaceAll('&','&amp;').replaceAll('<','&lt;')).join(' · ')+'</small>');
+          day.classList.add('planned'); day.dataset.planId=row.id;
         }else{target.textContent='+ Add dinner';day.classList.remove('planned');delete day.dataset.planId}
       });
     }catch(e){}
