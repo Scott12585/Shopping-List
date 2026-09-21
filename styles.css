@@ -27,3 +27,19 @@
 .recipe-head{padding-right:14px;padding-bottom:38px}.recipe-fab{position:fixed;right:max(14px,calc((100vw - 680px)/2 + 14px));bottom:calc(76px + env(safe-area-inset-bottom));height:36px;padding:0 12px;border:0;border-radius:18px;background:var(--green);color:#fff;font-size:12px;font-weight:800;box-shadow:0 3px 10px #0002;z-index:20}
 .recipe-editor-head{display:flex;align-items:center;justify-content:space-between;margin:12px 0 7px}.small-outline{border:1px solid var(--green);background:#fff;color:var(--green);border-radius:14px;padding:5px 9px;font-weight:800}
 .ingredient-edit-row{display:flex;gap:7px;margin-bottom:7px}.ingredient-edit-row input{flex:1;min-width:0}.ingredient-edit-row button{width:36px;border:0;border-radius:10px;background:#f2e7e7;color:#a52222;font-size:20px}
+
+/* Recipe layout polish v16 */
+#recipesView{padding-bottom:12px}
+.recipe-tools{position:sticky;top:0;z-index:12;background:var(--bg,#f7f8f5);padding:4px 0 9px;display:flex;align-items:center;gap:8px}
+.recipe-tools .search{flex:1;margin:0;min-width:0}
+.recipe-top-add{flex:0 0 auto;height:36px;padding:0 12px;border:0;border-radius:18px;background:var(--green);color:#fff;font-size:12px;font-weight:800;white-space:nowrap;box-shadow:0 2px 7px #0001}
+.recipe-fab{display:none}
+.recipe-card{position:relative}
+.recipe-head{padding:13px 58px 13px 14px;min-height:48px}
+.recipe-edit-mini{top:10px;right:10px;bottom:auto;padding:5px 9px}
+.recipe-body{position:relative;z-index:1}
+.recipe-ing{padding-right:10px}
+#recipeEditModal{align-items:flex-end;padding-top:max(18px,env(safe-area-inset-top))}
+#recipeEditModal .sheet{max-height:calc(100dvh - max(18px,env(safe-area-inset-top)));overflow-y:auto;overscroll-behavior:contain;padding-top:8px;border-radius:18px 18px 0 0}
+#recipeEditModal .sheet-head{position:sticky;top:-8px;z-index:4;background:var(--card,#fff);padding-top:8px}
+#recipeEditModal .grab{position:sticky;top:0;z-index:5}
