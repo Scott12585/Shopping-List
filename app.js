@@ -46,3 +46,27 @@ saveCustom.onclick=async()=>{const name=customName.value.trim(),category_id=Numb
 function openEdit(id){const x=enriched(list.find(l=>l.id===id));if(!x)return;editingId=id;editItemName.textContent=x.name;editPrice.value=x.price??'';editNote.value=x.note??'';editModal.classList.remove('hidden')}
 closeEdit.onclick=()=>editModal.classList.add('hidden');editModal.onclick=e=>{if(e.target===editModal)editModal.classList.add('hidden')};saveEdit.onclick=async()=>{if(!editingId)return;try{const r=await api('shop_list?id=eq.'+editingId,{method:'PATCH',body:JSON.stringify({price:editPrice.value===''?null:Number(editPrice.value),note:editNote.value.trim()||null,updated_at:new Date().toISOString()})});list=list.map(x=>x.id===editingId?r[0]:x);editModal.classList.add('hidden');renderShopping();toast('Item updated')}catch(e){toast('Could not update item')}};
 function toast(s){toastEl=document.getElementById('toast');toastEl.textContent=s;toastEl.classList.remove('hidden');setTimeout(()=>toastEl.classList.add('hidden'),1800)}load();
+
+// Shopping List live sync - v48
+let shoppingRealtimeTimer=null;
+async function refreshShoppingRealtime(){
+  try{
+    const fresh=await api('shop_list?select=*&order=added_at');
+    list=fresh;
+    renderShopping();
+    renderPantry();
+    renderRecipes();
+  }catch(e){}
+}
+function queueShoppingRealtimeRefresh(){
+  clearTimeout(shoppingRealtimeTimer);
+  shoppingRealtimeTimer=setTimeout(refreshShoppingRealtime,250);
+}
+function startShoppingRealtime(){
+  if(!window.supabase?.createClient)return;
+  const rt=window.supabase.createClient(URL,KEY,{auth:{persistSession:false,autoRefreshToken:false}});
+  rt.channel('shopping-list-live')
+    .on('postgres_changes',{event:'*',schema:'public',table:'shop_list'},queueShoppingRealtimeRefresh)
+    .subscribe();
+}
+window.addEventListener('load',()=>setTimeout(startShoppingRealtime,500));
