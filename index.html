@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f7f8f5"><title>Shopping List</title><link rel="stylesheet" href="styles.css?v=31">
+<meta name="theme-color" content="#f7f8f5"><title>Shopping List</title><link rel="stylesheet" href="styles.css?v=32">
 </head>
 <body>
 <div class="app">
@@ -44,6 +44,12 @@
     const end=new Date(d); end.setDate(end.getDate()+6);
     const fmt=x=>x.toLocaleDateString(undefined,{month:'short',day:'numeric'});
     if(weekLabel) weekLabel.textContent=plannerWeekOffset===0?'This Week · '+fmt(d)+' – '+fmt(end):fmt(d)+' – '+fmt(end);
+    document.querySelectorAll('.planner-day-static').forEach((row,i)=>{
+      const x=new Date(d); x.setDate(x.getDate()+i);
+      let date=row.querySelector('.planner-day-date');
+      if(!date){date=document.createElement('small');date.className='planner-day-date';row.querySelector('strong')?.insertAdjacentElement('afterend',date);}
+      date.textContent=x.toLocaleDateString(undefined,{month:'short',day:'numeric'});
+    });
   }
   if(prevWeek) prevWeek.addEventListener('click',()=>{plannerWeekOffset--;updatePlannerWeek()});
   if(nextWeek) nextWeek.addEventListener('click',()=>{plannerWeekOffset++;updatePlannerWeek()});
