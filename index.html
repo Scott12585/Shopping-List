@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f8f5"><title>Shopping List</title><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+<header><div><p class="eyebrow">HOUSEHOLD</p><h1 id="title">Shopping</h1></div><button class="icon-btn" id="addBtn" aria-label="Add item">＋</button></header>
+<main>
+<section id="shoppingView">
+<div class="summary"><div><strong id="itemCount">0 items</strong><span>on your list</span></div><div class="total"><span>Estimated</span><strong id="total">$0.00</strong></div></div>
+<div id="shoppingGroups"></div>
+<div id="completedWrap" class="completed-wrap hidden"><button class="section-toggle" id="completedToggle"><span>Purchased</span><span id="completedCount">0</span></button><div id="completedList" class="hidden"></div><button id="clearPurchased" class="text-btn">Clear purchased</button></div>
+</section>
+<section id="pantryView" class="hidden">
+<div class="search"><span>⌕</span><input id="search" placeholder="Search pantry…" autocomplete="off"></div>
+<div class="chips" id="chips"></div><div id="pantryList"></div>
+</section>
+</main>
+<nav><button data-view="shopping" class="active"><span>✓</span>Shopping</button><button data-view="pantry"><span>▦</span>Pantry</button><button class="disabled" disabled><span>⌂</span>Meals<small>Soon</small></button></nav>
+</div>
+<div class="modal hidden" id="modal"><div class="sheet"><div class="grab"></div><div class="sheet-head"><h2>Add item</h2><button id="closeModal">×</button></div><label>Item name<input id="customName" placeholder="What do you need?"></label><div class="row"><label>Quantity<input id="customQty" type="number" min="1" value="1"></label><label>Price<input id="customPrice" type="number" min="0" step=".01" placeholder="0.00"></label></div><button id="saveCustom" class="primary">Add to list</button></div></div>
+<div class="toast hidden" id="toast"></div><script src="app.js"></script>
+</body></html>
