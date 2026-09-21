@@ -139,3 +139,7 @@ button.planner-day-static{border:0;width:100%;font-family:inherit;text-align:lef
 .planner-select-add{display:grid;grid-template-columns:minmax(0,1fr) 34px;gap:6px;align-items:center}
 .planner-select-add select{width:100%;min-width:0}
 .planner-new-recipe{width:34px;height:34px;border:1px solid #0c343d;border-radius:9px;background:#fff;color:#0c343d;font-size:20px;font-weight:700;line-height:1;padding:0}
+
+/* Planner weekday/date spacing - v45 */
+.planner-day-static strong{display:block;line-height:1.15;padding-bottom:5px}
+.planner-day-static .planner-day-date{top:31px!important;line-height:1}
