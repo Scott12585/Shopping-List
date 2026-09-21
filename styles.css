@@ -161,3 +161,7 @@ nav .nav-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-wi
 .header-title-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .presence-indicator{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;background:#e7eeee;color:#0c343d;font-size:12px;font-weight:700;white-space:nowrap}
 .presence-dot{width:7px;height:7px;border-radius:50%;background:#2e8b57;box-shadow:0 0 0 2px rgba(46,139,87,.12)}
+
+/* Planner meal emphasis - v50 */
+.planner-day-static>span{font-size:15px;font-weight:800;color:#263f42;line-height:1.25}
+.planner-meal-extras{margin-top:4px;color:#566768;font-size:11px;font-weight:650;line-height:1.3}
