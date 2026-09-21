@@ -62,11 +62,31 @@ function queueShoppingRealtimeRefresh(){
   clearTimeout(shoppingRealtimeTimer);
   shoppingRealtimeTimer=setTimeout(refreshShoppingRealtime,250);
 }
+let shoppingRealtimeClient=null,shoppingRealtimeChannel=null;
+function updatePresenceIndicator(){
+  if(!shoppingRealtimeChannel)return;
+  const state=shoppingRealtimeChannel.presenceState();
+  const count=Object.values(state).reduce((n,entries)=>n+entries.length,0);
+  const el=document.getElementById('presenceIndicator'),txt=document.getElementById('presenceText');
+  if(!el||!txt)return;
+  if(count>0){txt.textContent=count+' online';el.classList.remove('hidden')}else el.classList.add('hidden');
+}
 function startShoppingRealtime(){
   if(!window.supabase?.createClient)return;
-  const rt=window.supabase.createClient(URL,KEY,{auth:{persistSession:false,autoRefreshToken:false}});
-  rt.channel('shopping-list-live')
+  const sessionId=(crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random());
+  shoppingRealtimeClient=window.supabase.createClient(URL,KEY,{auth:{persistSession:false,autoRefreshToken:false}});
+  shoppingRealtimeChannel=shoppingRealtimeClient.channel('shopping-list-live',{
+    config:{presence:{key:sessionId}}
+  })
     .on('postgres_changes',{event:'*',schema:'public',table:'shop_list'},queueShoppingRealtimeRefresh)
-    .subscribe();
+    .on('presence',{event:'sync'},updatePresenceIndicator)
+    .on('presence',{event:'join'},updatePresenceIndicator)
+    .on('presence',{event:'leave'},updatePresenceIndicator)
+    .subscribe(async status=>{
+      if(status==='SUBSCRIBED'){
+        await shoppingRealtimeChannel.track({online_at:new Date().toISOString()});
+        updatePresenceIndicator();
+      }
+    });
 }
 window.addEventListener('load',()=>setTimeout(startShoppingRealtime,500));
