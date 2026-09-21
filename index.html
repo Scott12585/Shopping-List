@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f7f8f5"><title>Shopping List</title><link rel="stylesheet" href="styles.css?v=34">
+<meta name="theme-color" content="#f7f8f5"><title>Shopping List</title><link rel="stylesheet" href="styles.css?v=35">
 </head>
 <body>
 <div class="app">
@@ -69,9 +69,16 @@
     dinnerIngredients.innerHTML='<div class="planner-ing-title">Ingredients</div>'+rows.map(r=>{
       const label=r.querySelector('span')?.textContent.trim()||'';
       const added=r.querySelector('.recipe-add')?.classList.contains('added');
-      return '<div class="planner-ing-row"><span>'+label.replaceAll('&','&amp;').replaceAll('<','&lt;')+'</span><small class="'+(added?'on':'')+'">'+(added?'Added':'Not added')+'</small></div>';
+      const addBtn=r.querySelector('.recipe-add'); const m=addBtn?.getAttribute('onclick')?.match(/\((\d+)\)/); const ingredientId=m?Number(m[1]):null;
+      return '<div class="planner-ing-row"><span>'+label.replaceAll('&','&amp;').replaceAll('<','&lt;')+'</span><button class="planner-ing-toggle '+(added?'added':'')+'" data-ingredient-id="'+(ingredientId||'')+'">'+(added?'✓ Added':'+ Add')+'</button></div>';
     }).join('');
     dinnerIngredients.classList.remove('hidden');
+    dinnerIngredients.querySelectorAll('.planner-ing-toggle').forEach(b=>b.addEventListener('click',async e=>{
+      e.preventDefault(); e.stopPropagation();
+      const id=Number(b.dataset.ingredientId); if(!id||typeof addRecipeIngredient!=='function')return;
+      b.disabled=true;
+      try{await addRecipeIngredient(id);showPlannerIngredients()}finally{b.disabled=false}
+    }));
   }
   document.querySelectorAll('.planner-day-static').forEach(day=>{
     day.addEventListener('click',()=>{
