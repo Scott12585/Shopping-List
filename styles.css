@@ -134,3 +134,8 @@ button.planner-day-static{border:0;width:100%;font-family:inherit;text-align:lef
 .planner-meal-extras{display:block;margin-top:2px;color:#7b8582;font-size:10px;font-weight:600;line-height:1.25}
 .planner-ing-group+.planner-ing-group{border-top:5px solid #f3f5f3}
 .planner-ing-group .planner-ing-title{position:sticky;top:0;z-index:1}
+
+/* Create recipes directly from Planner - v44 */
+.planner-select-add{display:grid;grid-template-columns:minmax(0,1fr) 34px;gap:6px;align-items:center}
+.planner-select-add select{width:100%;min-width:0}
+.planner-new-recipe{width:34px;height:34px;border:1px solid #0c343d;border-radius:9px;background:#fff;color:#0c343d;font-size:20px;font-weight:700;line-height:1;padding:0}
