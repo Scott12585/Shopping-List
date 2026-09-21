@@ -61,3 +61,13 @@
 .planner-placeholder strong{display:block;color:#0c343d;font-size:18px;margin-bottom:6px}
 .planner-placeholder span{display:block;color:#747c72;font-size:13px;line-height:1.4}
 nav button{min-width:0}
+
+/* Planner static week layout - v27 */
+.planner-week-static{margin:8px 16px 18px}
+.planner-week-title{background:#fff;border-radius:14px;padding:12px 14px;margin-bottom:9px;text-align:center;box-shadow:0 1px 4px #0000000c}
+.planner-week-title strong{display:block;color:#0c343d;font-size:16px}
+.planner-week-title span{display:block;color:#747c72;font-size:11px;margin-top:2px}
+.planner-day-static{background:#fff;border-radius:13px;padding:13px 14px;margin-bottom:8px;display:grid;grid-template-columns:90px 1fr 14px;align-items:center;box-shadow:0 1px 4px #0000000c}
+.planner-day-static strong{color:#0c343d;font-size:13px}
+.planner-day-static span{font-size:14px;font-weight:600;color:#8a9696}
+.planner-day-static b{font-size:20px;font-weight:400;color:#9aa4a4}
