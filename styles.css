@@ -184,3 +184,9 @@ nav{grid-template-columns:repeat(5,1fr)}
 .import-card input:focus{border-color:#0c343d}
 .import-button{width:100%;min-height:44px;border:0;border-radius:12px;background:#0c343d;color:#fff;font-weight:800;font-size:14px}
 .import-note{margin-top:14px;color:#87918f;font-size:11px;line-height:1.4}
+
+/* Recipe source links - v57 */
+#recipeEditUrl{width:100%;margin:4px 0 10px;border:1px solid #d7dfdc;border-radius:12px;padding:11px 12px;font-size:15px;outline:none}
+#recipeEditUrl:focus{border-color:#0c343d}
+.recipe-source-wrap{padding:9px 10px;border-bottom:1px solid var(--line);background:#f7f9f8}
+.recipe-source-link{display:inline-flex;align-items:center;gap:5px;color:#0c343d;text-decoration:none;font-size:12px;font-weight:800;padding:6px 9px;background:#e7eeee;border-radius:14px}
